@@ -21,10 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-l%giboh%$ch*prz6ikhd$hj#4%aa4i^onje#07u94@4og@d79i'
+#SECRET_KEY = 'django-insecure-l%giboh%$ch*prz6ikhd$hj#4%aa4i^onje#07u94@4og@d79i'
+with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['oscarleal.ddns.net']
 
@@ -126,3 +128,13 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static/')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# HTTPS settings
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+# HSTS settings
+SECURE_HSTS_SECONDS = 31536000 # 1 year
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
